@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+RUNNER = true
+
+require_relative 'lib/runner'
+
+abort 'usage: solve <year> <day> [part]' unless ARGV.size == 3 || ARGV.size == 2
+
+year_dir = Pathname.new(__dir__).join("aoc#{ARGV.first[2..3]}")
+
+abort "invalid year: #{ARGV.first}" unless year_dir.exist?
+
+problem = year_dir.join("#{ARGV.first}-#{ARGV[1]}.rb")
+
+abort 'Problem is not solved.' unless problem.exist?
+
+abort 'Part must be 1 or 2.' if ARGV[2] && !ARGV[2].to_i.between?(1, 2)
+
+puts Runner.new(ARGV[0], ARGV[1], ARGV[2].to_i).solve_and_print!

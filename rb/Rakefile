@@ -1,0 +1,22 @@
+# frozen_string_literal: true
+
+require 'rake/testtask'
+require 'rubocop/rake_task'
+
+task default: :test
+
+desc 'test all solved problems with real data'
+Rake::TestTask.new(:test_real) do |t|
+  t.pattern = 'spec/answers_spec.rb'
+  t.warning = false
+end
+
+# Rake::TestTask.new(test: :rubocop) do |t|
+Rake::TestTask.new(:test) do |t|
+  t.pattern = 'aoc*/*.rb'
+  t.warning = false
+end
+
+RuboCop::RakeTask.new(:rubocop) do |t|
+  t.options = ['--display-cop-names']
+end

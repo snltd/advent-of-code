@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Generates a skeleton solution file from a template in lib/.
+
+require 'date'
+require 'erb'
+require 'fileutils'
+require 'pathname'
+
+ROOT = Pathname.new(__dir__)
+template = ROOT.join('lib', 'template.erb')
+
+abort 'usage: init <year> <day>' unless ARGV.length == 2
+
+year, day = ARGV.map(&:to_i)
+this_year = Date.today.year
+
+abort 'ERROR: Invalid year.' unless (2015..this_year).cover?(year)
+abort 'ERROR: Invalid day.' unless (1..25).cover?(day)
+
+day = format('%02d', day)
+
+outdir = ROOT.join("aoc#{year - 2000}")
+
+FileUtils.mkdir(outdir) unless outdir.exist?
+
+outfile = outdir.join("#{year}-#{day}.rb")
+
+abort "ERROR: '#{outfile}' already exists." if outfile.exist?
+
+File.open(outfile, 'w') do |fh|
+  fh.puts(ERB.new(File.read(template)).result_with_hash(year: year, day: day))
+end
+
+puts outfile
