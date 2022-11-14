@@ -3,6 +3,7 @@
 # frozen_string_literal: true
 
 require_relative '../lib/base'
+require_relative '../lib/light_grid'
 
 # https://adventofcode.com/2015/day/6
 # Grid of lights
@@ -11,136 +12,43 @@ class Aoc201506
   SIZE = 1000
 
   def solve01(input)
-    grid = init_grid
-
-    input.as_lines.each do |i|
-      nums = i.match(/(\d+,\d+) .* (\d+,\d+)/)
-      if i.start_with?('toggle')
-        toggle01 grid, nums[1], nums[2]
-      elsif i.start_with?('turn on')
-        on01 grid, nums[1], nums[2]
-      elsif i.start_with?('turn off')
-        off01 grid, nums[1], nums[2]
-      end
-    end
-
-    count01(grid)
+    LightGrid01.new(SIZE, SIZE).play_input(input)
   end
 
   def solve02(input)
-    grid = init_grid
+    LightGrid02.new(SIZE, SIZE).play_input(input)
+  end
+end
 
-    input.as_lines.each do |i|
-      nums = i.match(/(\d+,\d+) .* (\d+,\d+)/)
-      if i.start_with?('toggle')
-        toggle02 grid, nums[1], nums[2]
-      elsif i.start_with?('turn on')
-        on02 grid, nums[1], nums[2]
-      elsif i.start_with?('turn off')
-        off02 grid, nums[1], nums[2]
-      end
-    end
-
-    count02(grid)
+class LightGrid01 < LightGrid
+  def on(points)
+    points.each { |p| @grid[p] = 1 }
   end
 
-  private
-
-  def init_grid
-    grid = []
-
-    1.upto(SIZE) do |_row|
-      grid.<< Array.new(SIZE, 0)
-    end
-
-    grid
+  def off(points)
+    points.each { |p| @grid[p] = 0 }
   end
 
-  def off01(grid, top_left, bottom_right)
-    x1, y1 = top_left.split(',').map(&:to_i)
-    x2, y2 = bottom_right.split(',').map(&:to_i)
+  def toggle(points)
+    points.each { |p| @grid[p] = @grid[p].zero? ? 1 : 0 }
+  end
+end
 
-    x1.upto(x2) do |x|
-      y1.upto(y2) do |y|
-        grid[y][x] = 0
-      end
-    end
-
-    grid
+class LightGrid02 < LightGrid
+  def on(points)
+    points.each { |p| @grid[p] += 1 }
   end
 
-  def off02(grid, top_left, bottom_right)
-    x1, y1 = top_left.split(',').map(&:to_i)
-    x2, y2 = bottom_right.split(',').map(&:to_i)
-
-    x1.upto(x2) do |x|
-      y1.upto(y2) do |y|
-        grid[y][x] -= 1 unless grid[y][x].zero?
-      end
-    end
-
-    grid
+  def off(points)
+    points.each { |p| @grid[p] -= 1 unless @grid[p].zero? }
   end
 
-  def on01(grid, top_left, bottom_right)
-    x1, y1 = top_left.split(',').map(&:to_i)
-    x2, y2 = bottom_right.split(',').map(&:to_i)
-
-    x1.upto(x2) do |x|
-      y1.upto(y2) do |y|
-        grid[y][x] = 1
-      end
-    end
-
-    grid
+  def toggle(points)
+    points.each { |p| @grid[p] += 2 }
   end
 
-  def on02(grid, top_left, bottom_right)
-    x1, y1 = top_left.split(',').map(&:to_i)
-    x2, y2 = bottom_right.split(',').map(&:to_i)
-
-    x1.upto(x2) do |x|
-      y1.upto(y2) do |y|
-        grid[y][x] += 1
-      end
-    end
-
-    grid
-  end
-
-  def toggle01(grid, top_left, bottom_right)
-    x1, y1 = top_left.split(',').map(&:to_i)
-    x2, y2 = bottom_right.split(',').map(&:to_i)
-
-    x1.upto(x2) do |x|
-      y1.upto(y2) do |y|
-        curr = grid[y][x]
-        grid[y][x] = curr == 1 ? 0 : 1
-      end
-    end
-
-    grid
-  end
-
-  def toggle02(grid, top_left, bottom_right)
-    x1, y1 = top_left.split(',').map(&:to_i)
-    x2, y2 = bottom_right.split(',').map(&:to_i)
-
-    x1.upto(x2) do |x|
-      y1.upto(y2) do |y|
-        grid[y][x] += 2
-      end
-    end
-
-    grid
-  end
-
-  def count01(grid)
-    grid.flatten.count { |n| n == 1 }
-  end
-
-  def count02(grid)
-    grid.flatten.sum
+  def count
+    @grid.sum
   end
 end
 
