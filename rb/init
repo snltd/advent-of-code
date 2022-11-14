@@ -33,6 +33,6 @@ File.open(outfile, 'w') do |fh|
   fh.puts(ERB.new(File.read(template)).result_with_hash(year: year, day: day))
 end
 
-outfile.chmod(755)
+outfile.chmod(0755)
 
 puts outfile
