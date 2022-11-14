@@ -21,34 +21,40 @@ module TestBase
   end
 
   def test_part01
-    skip if slow_test?('01')
-
-    table01.each { |input, val| assert_equal(val, @c.solve01(input.to_s)) } if respond_to?(:table01)
-
-    if respond_to?(:answer01)
-      if respond_to?(:sample)
-        assert_equal(answer01, @c.solve01(sample))
-      elsif respond_to?(:sample01)
-        assert_equal(answer01, @c.solve01(sample01))
-      end
-    end
+    test_part('01')
   end
 
   def test_part02
-    skip if slow_test?('02')
+    test_part('02')
+  end
 
-    table02.each { |input, val| assert_equal(val, @c.solve02(input.to_s)) } if respond_to?(:table02)
+  private
 
-    if respond_to?(:answer02)
-      if respond_to?(:sample)
-        assert_equal(answer02, @c.solve02(sample))
-      elsif respond_to?(:sample02)
-        assert_equal(answer02, @c.solve02(sample02))
+  def test_part(part)
+    skip if slow_test?(part)
+
+    table = "table#{part}".to_sym
+    solver = "solve#{part}".to_sym
+    answer = "answer#{part}".to_sym
+
+    if respond_to?(table)
+      send(table).each do |input, val|
+        assert_equal(val, @c.send(solver, input.to_s))
+      end
+    end
+
+    if respond_to?(answer)
+      if @c.method(solver).arity == -2
+        assert_equal(send(answer), @c.send(solver, sample_data(part), sample_val))
+      else
+        assert_equal(send(answer), @c.send(solver, sample_data(part)))
       end
     end
   end
 
-  private
+  def sample_data(part)
+    respond_to?(:sample) ? sample : send("sample#{part}")
+  end
 
   def problem_class
     self.class.name.sub('Test', '')
