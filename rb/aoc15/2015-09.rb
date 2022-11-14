@@ -27,7 +27,7 @@ class Aoc201509
   end
 
   def paths(input, route)
-    route.each_cons(2).map { |pair| input[pair] }.sum
+    route.each_cons(2).sum { |pair| input[pair] }
   end
 
   def process(input)
