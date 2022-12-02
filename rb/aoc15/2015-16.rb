@@ -80,12 +80,23 @@ class TestAoc201516 < MiniTest::Test
   include TestBase
 
   def test_suitable?
-    refute @c.suitable?({ 'children' => 1, 'cars' => 8, 'vizslas' => 7 }, @c.ticker)
-    assert @c.suitable?({ 'children' => 3, 'cars' => 2, 'vizslas' => 0 }, @c.ticker)
+    refute(@c.suitable?(
+             { 'children' => 1, 'cars' => 8, 'vizslas' => 7 },
+             @c.ticker
+           ))
+
+    assert(@c.suitable?(
+             { 'children' => 3, 'cars' => 2, 'vizslas' => 0 },
+             @c.ticker
+           ))
   end
 
   def test_suitable02?
-    # refute @c.suitable02?({"children"=>3, "cats"=>7, "vizslas"=>7}, @c.ticker)
-    assert @c.suitable02?({ 'children' => 3, 'cats' => 8, 'vizslas' => 0 }, @c.ticker)
+    refute(@c.suitable02?({ 'children' => 3, 'cats' => 7, 'vizslas' => 7 }, @c.ticker))
+
+    assert(@c.suitable02?(
+             { 'children' => 3, 'cats' => 8, 'vizslas' => 0 },
+             @c.ticker
+           ))
   end
 end

@@ -6,11 +6,11 @@ require_relative '../lib/base'
 
 class Aoc202006
   def solve01(input)
-    input.as_chunks.sum { |answers| yeses(answers) }
+    input.as_blocks.sum { |answers| yeses(answers) }
   end
 
   def solve02(input)
-    input.as_chunks.sum { |q| unanimous_yeses(q) }
+    input.as_blocks.sum { |q| unanimous_yeses(q) }
   end
 
   def yeses(answers)

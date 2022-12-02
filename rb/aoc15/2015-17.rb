@@ -12,7 +12,7 @@ class Aoc201517
     input = input.as_ints
 
     1.upto(input.size).inject(0) do |aggr, l|
-      aggr += input.combination(l).count { |c| c.sum == val }
+      aggr + input.combination(l).count { |c| c.sum == val }
     end
   end
 
@@ -20,7 +20,7 @@ class Aoc201517
     input = input.as_ints
 
     combis = 1.upto(input.size).inject([]) do |aggr, l|
-      aggr += input.combination(l).select { |c| c.sum == val }
+      aggr + input.combination(l).select { |c| c.sum == val }
     end
 
     min_num = combis.map(&:size).min

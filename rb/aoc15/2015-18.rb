@@ -33,6 +33,7 @@ end
 
 class LightGrid1801 < LightGrid
   def iterate
+    onvals = [2, 3]
     new_grid = []
 
     @grid.each_with_index do |v, i|
@@ -41,17 +42,15 @@ class LightGrid1801 < LightGrid
       new_val = if v.zero?
                   n == 3 ? 1 : 0
                 else
-                  n == 2 || n == 3 ? 1 : 0
+                  onvals.include?(n) ? 1 : 0
                 end
 
       new_grid[i] = new_val
     end
 
     @grid = new_grid
-    stuck_on
+    stuck_on if respond_to?(:stuck_on)
   end
-
-  def stuck_on; end
 end
 
 class LightGrid1802 < LightGrid1801

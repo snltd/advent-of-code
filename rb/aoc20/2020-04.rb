@@ -16,11 +16,11 @@ REQUIRED_FIELDS = [
 
 class Aoc202004
   def solve01(input)
-    input.as_chunks.count { |passport| check(passport) }
+    input.as_blocks.count { |passport| check(passport) }
   end
 
   def solve02(input)
-    input.as_chunks.count { |passport| valid?(passport) }
+    input.as_blocks.count { |passport| valid?(passport) }
   end
 
   def check(passport)

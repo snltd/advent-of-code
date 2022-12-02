@@ -6,7 +6,7 @@ require_relative '../lib/base'
 
 class Aoc202016
   def solve01(input)
-    rules, _, nearby = input.as_chunks
+    rules, _, nearby = input.as_blocks
     rules = parse_rules(rules)
 
     parse_tickets(nearby).each_with_object([]) do |t, aggr|
