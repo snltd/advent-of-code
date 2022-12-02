@@ -16,15 +16,12 @@ class String
     split("\n").map(&:chars)
   end
 
-  # @return [Array] plain text chunks, which were originally separated by
-  #   blank lines. (NOT newlines!)
-  #
-  def as_chunks
-    split(/^\s*$/).compact.map(&:strip)
+  def as_blocks
+    split(/\n\n/).map(&:strip)
   end
 
-  def as_blocks
-    split(/\n\n/)
+  def as_int_blocks
+    split(/\n\n/).map { |b| b.lines.map(&:to_i) }
   end
 
   # Assembler input, from 2020-08
