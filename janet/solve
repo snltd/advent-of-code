@@ -1,0 +1,23 @@
+#!/usr/bin/env janet
+
+(import spork/argparse)
+(import spork/misc)
+(import spork/path)
+(import "./lib/input")
+
+(if-not (= 3 (length (dyn :args)))
+  (do (print "usage: solve <year> <day>") (os/exit 1)))
+
+(def year (misc/penultimate (dyn :args)))
+(def solver true)
+(def day (last (dyn :args)))
+(def file
+  (string/join
+    ["." (string "aoc" (string/slice year 2 4)) (string year "-" day)] "/"))
+
+(import* file :as "problem")
+
+(def input (problem/input-type (input/raw year day)))
+
+(print (string year "-" day " part 01    ") (problem/solve-01 input))
+(print (string year "-" day " part 02    ") (problem/solve-02 input))
