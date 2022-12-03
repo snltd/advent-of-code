@@ -1,18 +1,19 @@
 #!/usr/bin/env janet
 
 (import "../lib/input")
+(import "../lib/helpers")
 (import testament :prefix "" :exit true)
 
 (defn common-item-01
   [line]
   (let [[h1 h2] (partition (/ (length line) 2) (string/bytes line))
-        seen (zipcoll h1 (array/new-filled (length h1) true))]
+        seen (helpers/lookup-table h1)]
     (find |(seen $) h2)))
 
 (defn common-item-02
   [block]
-  (let [seen0 (zipcoll (string/bytes (block 0)) (array/new-filled (length (block 0)) true))
-        seen1 (zipcoll (string/bytes (block 1)) (array/new-filled (length (block 1)) true))]
+  (let [seen0 (helpers/lookup-table (block 0))
+        seen1 (helpers/lookup-table (block 1))]
     (find |(and (seen0 $) (seen1 $)) (string/bytes (last block)))))
 
 (defn value-of
@@ -21,7 +22,7 @@
 
 (defn solve-01
   [input]
-    (sum (map value-of (map common-item-01 input))))
+  (sum (map value-of (map common-item-01 input))))
 
 (defn solve-02
   [input]
