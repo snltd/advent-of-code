@@ -11,12 +11,12 @@
 (defn contains?
   [line]
     (let [[l1 r1 l2 r2] (destructure line)]
-      (or (and (<= l1 l2) (>= r1 r2)) (and (<= l2 l1) (>= r2 r1)))))
+      (or (<= l1 l2 r2 r1) (<= l2 l1 r1 r2))))
 
 (defn overlaps?
   [line]
     (let [[l1 r1 l2 r2] (destructure line)]
-      (and (>= r1 l2) (>= r2 l1))))
+      (>= r1 l2 r2 l1)))
 
 (defn solve-01
   [input]
