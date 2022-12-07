@@ -44,7 +44,7 @@ class Runner
   end
 
   def input
-    File.read(input_file).strip
+    File.read(input_file)
   end
 
   def input_file

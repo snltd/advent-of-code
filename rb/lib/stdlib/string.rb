@@ -16,6 +16,10 @@ class String
     split("\n").map(&:chars)
   end
 
+  def as_raw_blocks
+    split(/\n\n/) # don't strip!
+  end
+
   def as_blocks
     split(/\n\n/).map(&:strip)
   end

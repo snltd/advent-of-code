@@ -15,6 +15,8 @@ class Aoc202203
     input.as_lines.each_slice(3).sum { |b| value_for(common_item02(b)) }
   end
 
+  private
+
   def value_for(char)
     ord = char.ord - 96
     ord.positive? ? ord : ord + 58
@@ -22,13 +24,13 @@ class Aoc202203
 
   def common_item01(line)
     c2 = line.length / 2
-    seen = line[0...c2].chars.zip(Array.new(c2 - 1)).to_h
+    seen = hash_table(line[0...c2])
     line[c2..].each_char { |c| return c if seen.key?(c) }
   end
 
   def common_item02(block)
-    seen00 = block[0].chars.zip(Array.new(block[0].length)).to_h
-    seen01 = block[1].chars.zip(Array.new(block[1].length)).to_h
+    seen00 = hash_table(block[0])
+    seen01 = hash_table(block[1])
 
     block[2].each_char { |c| return c if seen00.key?(c) && seen01.key?(c) }
   end

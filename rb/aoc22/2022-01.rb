@@ -20,11 +20,11 @@ class TestAoc202201 < MiniTest::Test
   include TestBase
 
   def answer01
-    24000
+    24_000
   end
 
   def answer02
-    45000
+    45_000
   end
 
   def sample
