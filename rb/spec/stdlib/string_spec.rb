@@ -25,6 +25,15 @@ class TestString < MiniTest::Test
     )
   end
 
+  def test_as_int_grid
+    assert_equal(
+      [[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]], sample('int_grid').as_int_grid
+    )
+  end
+
+
   def test_as_blocks
     assert_equal(
       %W[block0 block1\nblock1 block2],

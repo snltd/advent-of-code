@@ -20,6 +20,10 @@ class String
     split(/\n\n/) # don't strip!
   end
 
+  def as_int_grid
+    split("\n").map { |l| l.chars.map(&:to_i) }
+  end
+
   def as_blocks
     split(/\n\n/).map(&:strip)
   end
