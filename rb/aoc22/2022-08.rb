@@ -82,16 +82,15 @@ class Aoc202208
   end
 
   def scenic_score(grid, x, y)
-    s = 0
     z = []
     h = grid[y][x]
 
-    (y - 1).downto(0) do |p| # up
+    z.<< (y - 1).downto(0).sum do |p, s| # up
       s += 1
       break if grid[p][x] >= h
     end
 
-    z.<< s
+    z << s
     s = 0
 
     (x - 1).downto(0) do |p| # left

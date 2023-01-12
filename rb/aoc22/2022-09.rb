@@ -11,9 +11,8 @@ class Aoc202209
   def solve01(input)
     h = [0, 0]
     t = [0, 0]
-    tv = Set.new
 
-    input.as_lines.each do |l|
+    input.as_lines.each.with_object(Set.new) do |l, tv|
       dir, count = l.split
 
       count.to_i.times do
@@ -21,17 +20,15 @@ class Aoc202209
         t = move_tail(h, t)
         tv.<< t.dup
       end
-    end
-
-    tv.size
+    end.size
   end
 
+  # rubocop:disable Metrics/AbcSize
   def solve02(input)
     h = [0, 0]
     t = Array.new(9, [0, 0])
-    tv = Set.new
 
-    input.as_lines.each do |l|
+    input.as_lines.each.with_object(Set.new) do |l, tv|
       dir, count = l.split
 
       count.to_i.times do
@@ -40,10 +37,9 @@ class Aoc202209
         1.upto(8) { |i| t[i] = move_tail(t[i - 1], t[i]).dup }
         tv.<< t[8].dup
       end
-    end
-
-    tv.size
+    end.size
   end
+  # rubocop:enable Metrics/AbcSize
 
   private
 
