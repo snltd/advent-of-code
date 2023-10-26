@@ -2,7 +2,6 @@
 
 # frozen_string_literal: true
 
-require 'set'
 require_relative '../lib/base'
 
 # https://adventofcode.com/2015/day/17
@@ -28,7 +27,7 @@ class Aoc201517
   end
 end
 
-class TestAoc201517 < MiniTest::Test
+class TestAoc201517 < Minitest::Test
   include TestBase
 
   def answer01

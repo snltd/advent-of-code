@@ -30,7 +30,7 @@ class Aoc201511
 
     chars = password.chars
 
-    return false if chars.each_cons(3).none? { |c| c[2] == c[1].next && c[1] == c[0].next }
+    return false if no_run?(chars)
 
     last = nil
     pairs = 0
@@ -41,5 +41,9 @@ class Aoc201511
     end
 
     pairs >= 2
+  end
+
+  def no_run?(chars)
+    chars.each_cons(3).none? { |c| c[2] == c[1].next && c[1] == c[0].next }
   end
 end

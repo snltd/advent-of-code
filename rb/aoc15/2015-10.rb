@@ -31,7 +31,7 @@ class Aoc201510
       if last == c || last.nil?
         run_length += 1
       else
-        ret.<< (run_length.to_s + last)
+        ret << (run_length.to_s + last)
         run_length = 1
       end
 

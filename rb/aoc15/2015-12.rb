@@ -16,6 +16,7 @@ class Aoc201512
     filter_node(JSON.parse(input))
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity
   def filter_node(node, sum = 0)
     case node
     when Integer
@@ -30,39 +31,36 @@ class Aoc201512
 
     sum
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
 end
 
-class TestAoc201512 < MiniTest::Test
+class TestAoc201512 < Minitest::Test
   include TestBase
 
   def test_filter_node1
     assert_equal(1, @c.filter_node(1))
     assert_equal(3, @c.filter_node([1, 2]))
 
-    assert_equal(
-      6,
-      @c.filter_node(
-        {
-          a: 1,
-          b: [2, 3]
-        }
-      )
-    )
+    assert_equal(6,
+                 @c.filter_node(
+                   {
+                     a: 1,
+                     b: [2, 3]
+                   }
+                 ))
 
-    assert_equal(
-      21,
-      @c.filter_node(
-        {
-          a: {
-            aa: [1, 2],
-            bb: {
-              'red' => 100
-            },
-            cc: [3, 4, 'red']
-          },
-          b: [5, 6]
-        }
-      )
-    )
+    assert_equal(21,
+                 @c.filter_node(
+                   {
+                     a: {
+                       aa: [1, 2],
+                       bb: {
+                         'red' => 100
+                       },
+                       cc: [3, 4, 'red']
+                     },
+                     b: [5, 6]
+                   }
+                 ))
   end
 end

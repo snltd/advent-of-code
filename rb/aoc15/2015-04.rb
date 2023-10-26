@@ -35,7 +35,7 @@ end
 
 # Tests
 #
-class TestAoc201504 < MiniTest::Test
+class TestAoc201504 < Minitest::Test
   include TestBase
 
   def table01

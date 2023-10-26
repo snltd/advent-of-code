@@ -31,7 +31,7 @@ class Aoc201514
   private
 
   def parse(input)
-    input.as_lines.map(&:split).map(&:to_i).map { |l| l.reject(&:zero?) }
+    input.as_lines.map { |x| x.split.to_i.reject(&:zero?) }
   end
 
   def distance(speed, fly_time, rest_time, target)
@@ -41,7 +41,7 @@ class Aoc201514
   end
 end
 
-class TestAoc201514 < MiniTest::Test
+class TestAoc201514 < Minitest::Test
   include TestBase
 
   def answer01

@@ -29,8 +29,8 @@ class Aoc201508
   def clean(line)
     line[1..-2]
       .strip
-      .gsub(/\\\\/, 'B')
-      .gsub(/\\"/, 'Q')
+      .gsub('\\\\', 'B')
+      .gsub('\\"', 'Q')
       .gsub(/\\x../, 'X')
       .size
   end
@@ -42,7 +42,7 @@ end
 
 # Tests
 #
-class TestAoc201508 < MiniTest::Test
+class TestAoc201508 < Minitest::Test
   include TestBase
 
   def table01

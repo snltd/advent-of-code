@@ -24,6 +24,8 @@ class Aoc201516
     props.all? { |k, v| ticker.fetch(k) == v }
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/PerceivedComplexity
   def suitable02?(props, ticker)
     props.each do |k, v|
       suesval = ticker.fetch(k)
@@ -39,6 +41,8 @@ class Aoc201516
 
     true
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def parse(input)
     input.lines.to_h do |l|
@@ -76,7 +80,7 @@ class Aoc201516
   end
 end
 
-class TestAoc201516 < MiniTest::Test
+class TestAoc201516 < Minitest::Test
   include TestBase
 
   def test_suitable?
@@ -92,7 +96,8 @@ class TestAoc201516 < MiniTest::Test
   end
 
   def test_suitable02?
-    refute(@c.suitable02?({ 'children' => 3, 'cats' => 7, 'vizslas' => 7 }, @c.ticker))
+    refute(@c.suitable02?({ 'children' => 3, 'cats' => 7, 'vizslas' => 7 },
+                          @c.ticker))
 
     assert(@c.suitable02?(
              { 'children' => 3, 'cats' => 8, 'vizslas' => 0 },

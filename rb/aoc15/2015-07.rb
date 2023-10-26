@@ -40,25 +40,26 @@ class Circuit
     @cache[gate]
   end
 
+  # rubocop:disable Metrics/AbcSize
   def do_gate(inst)
-    if inst.size == 1
-      solve(inst[0])
-    elsif inst[1] == :AND
+    return solve(inst[0]) if inst.size == 1
+
+    return ~solve(inst[1]) if inst[0] == :NOT
+
+    case inst[1]
+    when :AND
       solve(inst[0]) & solve(inst[2])
-    elsif inst[1] == :OR
+    when :OR
       solve(inst[0]) | solve(inst[2])
-    elsif inst[1] == :LSHIFT
+    when :LSHIFT
       solve(inst[0]) << inst[2].to_i
-    elsif inst[1] == :RSHIFT
+    when :RSHIFT
       solve(inst[0]) >> inst[2].to_i
-    elsif inst[0] == :NOT
-      ~solve(inst[1])
     end
   end
+  # rubocop:enable Metrics/AbcSize
 end
 
-# https://adventofcode.com/2015/day/1
-#
 class Aoc201507
   def solve01(input)
     Circuit.new(input).part01

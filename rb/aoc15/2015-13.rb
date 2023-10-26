@@ -22,7 +22,7 @@ class Aoc201513
   end
 
   def happiness_for(input, perm)
-    people = perm.<< perm.first # close the circle
+    people = perm << perm.first # close the circle
     people.each_cons(2).sum { |p| input[p[0]][p[1]] + input[p[1]][p[0]] }
   end
 
@@ -48,7 +48,7 @@ class Aoc201513
   end
 end
 
-class TestAoc201513 < MiniTest::Test
+class TestAoc201513 < Minitest::Test
   include TestBase
 
   def answer01
