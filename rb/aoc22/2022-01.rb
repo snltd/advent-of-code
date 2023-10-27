@@ -8,15 +8,15 @@ require_relative '../lib/base'
 #
 class Aoc202201
   def solve01(input)
-    input.as_num_blocks.map(&:sum).max
+    input.as_int_blocks.map(&:sum).max
   end
 
   def solve02(input)
-    input.as_num_blocks.map(&:sum).sort.reverse.take(3).sum
+    input.as_int_blocks.map(&:sum).sort.reverse.take(3).sum
   end
 end
 
-class TestAoc202201 < MiniTest::Test
+class TestAoc202201 < Minitest::Test
   include TestBase
 
   def answer01

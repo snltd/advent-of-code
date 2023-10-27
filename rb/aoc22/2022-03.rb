@@ -24,19 +24,19 @@ class Aoc202203
 
   def common_item01(line)
     c2 = line.length / 2
-    seen = hash_table(line[0...c2])
+    seen = line[0...c2].to_hash_table
     line[c2..].each_char { |c| return c if seen.key?(c) }
   end
 
   def common_item02(block)
-    seen00 = hash_table(block[0])
-    seen01 = hash_table(block[1])
+    seen00 = block[0].to_hash_table
+    seen01 = block[1].to_hash_table
 
     block[2].each_char { |c| return c if seen00.key?(c) && seen01.key?(c) }
   end
 end
 
-class TestAoc202203 < MiniTest::Test
+class TestAoc202203 < Minitest::Test
   include TestBase
 
   def answer01

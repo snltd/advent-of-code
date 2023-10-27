@@ -29,7 +29,7 @@ class Aoc202022
   end
 end
 
-class TestAoc202022 < MiniTest::Test
+class TestAoc202022 < Minitest::Test
   include TestBase
 
   def answer01

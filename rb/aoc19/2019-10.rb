@@ -24,7 +24,7 @@ class Aoc201910
 
   def asteroid_positions(input)
     input.split.each_with_object([]).with_index do |(row, aggr), y|
-      row.chars.each_with_index { |char, x| aggr.<< [x, y] if char == '#' }
+      row.chars.each_with_index { |char, x| aggr << [x, y] if char == '#' }
     end
   end
 
@@ -36,7 +36,7 @@ class Aoc201910
 
   def asteroid_positions(input)
     input.split.each_with_object([]).with_index do |(row, aggr), y|
-      row.chars.each_with_index { |char, x| aggr.<< [x, y] if char == '#' }
+      row.chars.each_with_index { |char, x| aggr << [x, y] if char == '#' }
     end
   end
 
@@ -70,7 +70,7 @@ class Aoc201910
 
         next if target.nil?
 
-        ret.<< target[0]
+        ret << target[0]
         asteroids_by_angle.delete(target)
       end
 
@@ -81,7 +81,7 @@ class Aoc201910
   end
 end
 
-class TestAoc201910 < MiniTest::Test
+class TestAoc201910 < Minitest::Test
   include TestBase
 
   def table01

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'stdlib/string'
+
 # The grid is represented as a single flat array, so a 3 x 3 grid looks like
 #
 #     0 1 2
@@ -8,49 +10,37 @@
 # 1 | 3 4 5
 # 2 | 6 7 8
 #
-class LightGrid
+class Grid
   attr_accessor :grid
 
-  def initialize(width, height)
-    @width = width
-    @height = height
-    @points = width * height
-    @grid = Array.new(@points, 0)
+  def initialize(grid, _size)
+    raw = grid.as_lines
+
+    @width = raw.first.size
+    @height = raw.size
+    @points = @width * @height
+    @grid = populate_with(grid)
   end
 
-  def play_input(input)
-    input.as_lines.each do |i|
-      nums = i.match(/(\d+,\d+) .* (\d+,\d+)/)
-      p = points(nums[1], nums[2])
-
-      if i.start_with?('toggle')
-        toggle(p)
-      elsif i.start_with?('turn on')
-        on(p)
-      elsif i.start_with?('turn off')
-        off(p)
-      end
-    end
-
-    count
+  def at(index)
+    @grid[index]
   end
 
-  def points(top_left, bottom_right)
-    x1, y1 = top_left.split(',').map(&:to_i)
-    x2, y2 = bottom_right.split(',').map(&:to_i)
-    row_length = x2 - x1
-
-    y1.upto(y2).with_object([]) do |y, ret|
-      row_start = x1 + (@width * y)
-      row_start.upto(row_start + row_length).each { |p| ret << p }
-    end
+  # Overload if you need to make them ints or something
+  #
+  def populate_with(grid)
+    grid.as_lines.map(&:chars).flatten
   end
 
-  def vals(points)
+  # Values at the given points
+  #
+  def vals_of(points)
     points.map { |p| @grid[p] }
   end
 
-  def neighbours(point)
+  # Neighbours of the given point when you can move N E S W
+  #
+  def neighbours4(point)
     ret = []
 
     p = point + 1 # one to the right
@@ -65,6 +55,14 @@ class LightGrid
     p = point + @width # immediately below
     ret << p if adjacent_row?(p, point)
 
+    ret.reject { |q| q.negative? || q >= @points }
+  end
+
+  # Neighbours of the given point when you can move in eight directions
+  #
+  def neighbours8(point)
+    ret = neighbours4(point)
+
     p = point - @width - 1 # up and left
     ret << p if adjacent_row?(p, point)
 
@@ -77,17 +75,11 @@ class LightGrid
     p = point + @width + 1
     ret << p if adjacent_row?(p, point)
 
-    ret.reject { |p| p.negative? || p >= @points }
+    ret.reject { |q| q.negative? || p >= @points }
   end
 
   def to_s
-    "\n" + @grid.each_slice(@width).map do |row|
-      row.map { |r| r.zero? ? '.' : '#' }.join
-    end.join("\n") + "\n"
-  end
-
-  def count
-    @grid.count { |n| n == 1 }
+    "\n#{@grid.each_slice(@width).map(&:join).join("\n")}\n"
   end
 
   private

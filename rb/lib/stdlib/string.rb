@@ -17,7 +17,7 @@ class String
   end
 
   def as_raw_blocks
-    split(/\n\n/) # don't strip!
+    split("\n\n") # don't strip!
   end
 
   def as_int_grid
@@ -25,11 +25,11 @@ class String
   end
 
   def as_blocks
-    split(/\n\n/).map(&:strip)
+    split("\n\n").map(&:strip)
   end
 
   def as_int_blocks
-    split(/\n\n/).map { |b| b.lines.map(&:to_i) }
+    split("\n\n").map { |b| b.lines.map(&:to_i) }
   end
 
   # Assembler input, from 2020-08
@@ -49,5 +49,11 @@ class String
   # tokenises each line, and turns tokens which look like ints into ints
   def parsed
     as_lines.map { |l| l.split.map { |c| c.match?(/\d/) ? c.to_i : c } }
+  end
+
+  # Make a hash lookup table out of an string
+  #
+  def to_hash_table
+    chars.zip(Array.new(length)).to_h
   end
 end

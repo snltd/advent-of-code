@@ -53,14 +53,14 @@ class Aoc201602
   def solve_it(input, keypad)
     num = '5'
 
-    input.as_lines.each.with_object((+'')) do |line, code|
+    input.as_lines.each.with_object(+'') do |line, code|
       line.each_char { |c| num = keypad[num].fetch(c.to_sym, num) }
-      code.<< num
+      code << num
     end
   end
 end
 
-class TestAoc201602 < MiniTest::Test
+class TestAoc201602 < Minitest::Test
   include TestBase
 
   def sample01

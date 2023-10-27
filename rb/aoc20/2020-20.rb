@@ -12,7 +12,7 @@ class Aoc202020
     tile_edges = tiles.transform_values { |t| edges(t) }
 
     all_edges = tile_edges.each_with_object([]) do |(_k, v), aggr|
-      aggr.<< (v[:normal] + v[:flipped])
+      aggr << (v[:normal] + v[:flipped])
     end.flatten
 
     counts = tile_edges.each_with_object([]) do |(k, v), aggr|
@@ -20,7 +20,7 @@ class Aoc202020
       v[:normal].each { |e| s += all_edges.count(e) }
       v[:flipped].each { |e| s += all_edges.count(e) }
 
-      aggr.<< [s, k]
+      aggr << [s, k]
     end
 
     counts.sort.take(4).map { |_k, v| v }.inject(:*)
@@ -46,7 +46,7 @@ class Aoc202020
   end
 end
 
-class TestAoc202020 < MiniTest::Test
+class TestAoc202020 < Minitest::Test
   include TestBase
 
   def answer01

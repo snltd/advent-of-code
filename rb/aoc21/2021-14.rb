@@ -20,10 +20,6 @@ class Aoc202114
     freqs.last - freqs.first
   end
 
-  def solve02(_input)
-    0
-  end
-
   private
 
   def expand(chain)
@@ -33,9 +29,9 @@ class Aoc202114
       to_ins = @pairs[p]
 
       if i.zero?
-        ret.<< [p[0], to_ins, p[1]] if to_ins
+        ret << [p[0], to_ins, p[1]] if to_ins
       elsif to_ins
-        ret.<< [to_ins, p[1]]
+        ret << [to_ins, p[1]]
       end
     end
 
@@ -43,7 +39,7 @@ class Aoc202114
   end
 end
 
-class TestAoc202114 < MiniTest::Test
+class TestAoc202114 < Minitest::Test
   include TestBase
 
   def answer01

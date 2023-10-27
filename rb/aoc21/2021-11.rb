@@ -49,14 +49,14 @@ class Aoc202111
 
   def flashers(input)
     input.each_with_index.with_object([]) do |(row, y), ret|
-      row.each_with_index { |o, x| ret.<< [x, y] if o > 9 }
+      row.each_with_index { |o, x| ret << [x, y] if o > 9 }
     end
   end
 
   def flash(input, point, _flashed = [])
     new_flashers = adjacent_to(*point).each.with_object([]) do |(x, y), aggr|
       input[y][x] += 1
-      aggr.<<([x, y]) if input[y][x] == 10
+      aggr << ([x, y]) if input[y][x] == 10
     end
 
     input.tap { new_flashers.each { |pt| flash(input, pt) } }
@@ -78,7 +78,7 @@ class Aoc202111
   end
 end
 
-class TestAoc202111 < MiniTest::Test
+class TestAoc202111 < Minitest::Test
   include TestBase
 
   def answer01

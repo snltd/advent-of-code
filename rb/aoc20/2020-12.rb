@@ -18,7 +18,7 @@ class Aoc202012
   end
 end
 
-class TestAoc202012 < MiniTest::Test
+class TestAoc202012 < Minitest::Test
   include TestBase
 
   def answer01
@@ -109,7 +109,7 @@ class Navigator
   end
 end
 
-class TestNavigator < MiniTest::Test
+class TestNavigator < Minitest::Test
   attr_reader :c
 
   EAST = [1, 0].freeze

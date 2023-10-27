@@ -25,7 +25,7 @@ end
 
 # Test the solution
 #
-class TestAoc202005 < MiniTest::Test
+class TestAoc202005 < Minitest::Test
   include TestBase
 
   def test_seat_id
@@ -77,7 +77,7 @@ end
 
 # Test the BinaryPartition class
 #
-class TestBinaryPartition < MiniTest::Test
+class TestBinaryPartition < Minitest::Test
   def test_fb
     assert_equal(44, BinaryPartition.new('FBFBBFF', 'B').value)
   end

@@ -84,7 +84,7 @@ class Display
   end
 end
 
-class TestDisplay < MiniTest::Test
+class TestDisplay < Minitest::Test
   def test_example
     d = Display.new(7, 3)
 

@@ -15,11 +15,11 @@ class Aoc202210
   def solve02(input)
     cycles = input_cycles(input.as_lines)
 
-    0.upto(5).with_object((+"\n")) do |row, ret|
+    0.upto(5).with_object(+"\n") do |row, ret|
       0.upto(39) do |c|
-        ret.<< [c - 1, c, c + 1].include?(cycles[c + (row * 40)]) ? '#' : '.'
+        ret << ([c - 1, c, c + 1].include?(cycles[c + (row * 40)]) ? '#' : '.')
       end
-      ret.<< "\n"
+      ret << "\n"
     end
   end
 
@@ -27,13 +27,13 @@ class Aoc202210
 
   def input_cycles(input)
     input.each.with_object([1]) do |l, ret|
-      ret.<< ret.last
-      ret.<< (ret.last + l.split.last.to_i) if l != 'noop'
+      ret << ret.last
+      ret << (ret.last + l.split.last.to_i) if l != 'noop'
     end
   end
 end
 
-class TestAoc202210 < MiniTest::Test
+class TestAoc202210 < Minitest::Test
   include TestBase
 
   def answer01

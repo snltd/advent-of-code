@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'set'
 require_relative '../lib/base'
 
 class Aoc202109
@@ -50,25 +49,25 @@ class Aoc202109
   def fill_basin(input, point, aggr = Set.new([]))
     return aggr if point.nil?
 
-    aggr.<< point
+    aggr << point
     (neighbours(input, *point) - aggr).each { |p| fill_basin(input, p, aggr) }
     fill_basin(input, p, aggr)
   end
 
   def line_mins(line, row)
     ([10] + line + [10]).each_cons(3).with_object([]).with_index do |(c, ret), i|
-      ret.<< [i, row] if c[1] < c[0] && c[1] < c[2]
+      ret << [i, row] if c[1] < c[0] && c[1] < c[2]
     end
   end
 
   def line_mins2(line, row)
     ([10] + line + [10]).each_cons(3).with_object([]).with_index do |(c, ret), i|
-      ret.<< [row, i] if c[1] < c[0] && c[1] < c[2]
+      ret << [row, i] if c[1] < c[0] && c[1] < c[2]
     end
   end
 end
 
-class TestAoc202109 < MiniTest::Test
+class TestAoc202109 < Minitest::Test
   include TestBase
 
   def answer01

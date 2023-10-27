@@ -37,18 +37,16 @@ module TestBase
     solver = "solve#{part}".to_sym
     answer = "answer#{part}".to_sym
 
-    if respond_to?(table)
-      send(table).each do |input, val|
-        assert_equal(val, @c.send(solver, input.to_s))
-      end
-    end
+    send(table).each { |i, v| assert_equal(v, @c.send(solver, i.to_s)) } if respond_to?(table)
 
-    if respond_to?(answer)
-      if @c.method(solver).arity == -2
-        assert_equal(send(answer), @c.send(solver, sample_data(part), sample_val))
-      else
-        assert_equal(send(answer), @c.send(solver, sample_data(part)))
-      end
+    assert_part(answer, solver, part) if respond_to?(answer)
+  end
+
+  def assert_part(answer, solver, part)
+    if @c.method(solver).arity == -2
+      assert_equal(send(answer), @c.send(solver, sample_data(part), sample_val))
+    else
+      assert_equal(send(answer), @c.send(solver, sample_data(part)))
     end
   end
 

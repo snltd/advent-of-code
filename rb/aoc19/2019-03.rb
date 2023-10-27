@@ -13,7 +13,7 @@ class Aoc201903
         mag.times do
           last_x, last_y = p[-1]
 
-          p.<< case dir
+          p << case dir
                when 'R'
                  [last_x + 1, last_y]
                when 'L'
@@ -39,7 +39,7 @@ class Aoc201903
         mag.times do
           last_x, last_y = p[-1]
 
-          p.<< case dir
+          p << case dir
                when 'R'
                  [last_x + 1, last_y]
                when 'L'
@@ -57,7 +57,7 @@ class Aoc201903
   end
 end
 
-class TestAoc201903 < MiniTest::Test
+class TestAoc201903 < Minitest::Test
   include TestBase
 
   def table01

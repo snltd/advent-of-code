@@ -210,7 +210,7 @@ module Intcode
     def opcode4(params)
       val = offset_val(1, params[0])
       debug "opcode4: appending #{val} to output"
-      @output.<< val
+      @output << val
       @pc += 2
       raise Intcode::Exception::Stop if @params[:stop_on_output]
     end

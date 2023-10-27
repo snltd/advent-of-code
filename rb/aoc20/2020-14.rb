@@ -18,7 +18,7 @@ class Aoc202014
   end
 end
 
-class TestAoc202014 < MiniTest::Test
+class TestAoc202014 < Minitest::Test
   include TestBase
 
   def answer01
@@ -78,7 +78,7 @@ class MaskedInterpreter
 
   def masked_num(mask, num)
     full_bin(num).each_char.with_index.with_object([]) do |(c, i), s|
-      s.<<(%w[0 1].include?(mask[i]) ? mask[i] : c)
+      s << (%w[0 1].include?(mask[i]) ? mask[i] : c)
     end.join
   end
 
@@ -115,7 +115,7 @@ class MaskedInterpreter2 < MaskedInterpreter
   end
 end
 
-class TestMaskedInterpreter < MiniTest::Test
+class TestMaskedInterpreter < Minitest::Test
   attr_reader :c
 
   def setup
@@ -142,7 +142,7 @@ class TestMaskedInterpreter < MiniTest::Test
   end
 end
 
-class TestMaskedInterpreter2 < MiniTest::Test
+class TestMaskedInterpreter2 < Minitest::Test
   attr_reader :c
 
   def setup

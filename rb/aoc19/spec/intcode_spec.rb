@@ -7,7 +7,7 @@ require_relative '../../lib/stdlib/string'
 
 # Tests
 #
-class TestComputer < MiniTest::Test
+class TestComputer < Minitest::Test
   def setup
     @c = Intcode::Computer.new
   end

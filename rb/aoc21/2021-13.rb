@@ -35,7 +35,7 @@ class Aoc202113
     x_max = lines.map { |l| l.split(',').first.to_i }.max
     y_max = lines.map { |l| l.split(',').last.to_i }.max
 
-    (y_max + 1).times { paper.<< Array.new(x_max + 1, '.') }
+    (y_max + 1).times { paper << Array.new(x_max + 1, '.') }
 
     lines.each_with_object(paper) do |l, aggr|
       x, y = l.split(',').map(&:to_i)
@@ -60,7 +60,7 @@ class Aoc202113
   end
 end
 
-class TestAoc202113 < MiniTest::Test
+class TestAoc202113 < Minitest::Test
   include TestBase
 
   def answer01

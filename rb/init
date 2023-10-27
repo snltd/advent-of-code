@@ -30,9 +30,9 @@ outfile = outdir.join("#{year}-#{day}.rb")
 abort "ERROR: '#{outfile}' already exists." if outfile.exist?
 
 File.open(outfile, 'w') do |fh|
-  fh.puts(ERB.new(File.read(template)).result_with_hash(year: year, day: day))
+  fh.puts(ERB.new(File.read(template)).result_with_hash(year:, day:))
 end
 
-outfile.chmod(0755)
+outfile.chmod(0o755)
 
 puts outfile

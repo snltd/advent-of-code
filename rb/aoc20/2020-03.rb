@@ -22,7 +22,7 @@ class Aoc202003
   end
 end
 
-class TestAoc202003 < MiniTest::Test
+class TestAoc202003 < Minitest::Test
   include TestBase
 
   def answer01
@@ -56,7 +56,7 @@ class Toboggan
   end
 
   def run(move)
-    g = Grid.new(@input, move: move)
+    g = Grid.new(@input, move:)
     hits = 0
 
     loop do
@@ -134,7 +134,7 @@ class OutsideGridX < RuntimeError; end
 
 class OutsideGridY < RuntimeError; end
 
-class TestGrid < MiniTest::Test
+class TestGrid < Minitest::Test
   attr_reader :c
 
   def setup

@@ -7,7 +7,9 @@ require:
 
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.2
+  Exclude:
+    - 'lib/template.erb'
 
 # I'm a bit more lax with Rubocop than normal.
 

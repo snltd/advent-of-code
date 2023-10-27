@@ -22,7 +22,7 @@ class Aoc202207
     return ['/'] if arg == '/'
     return cwd[0..-2] if arg == '..'
 
-    cwd.<< arg
+    cwd << arg
   end
 
   def parents(cwd)
@@ -44,7 +44,7 @@ class Aoc202207
   end
 end
 
-class TestAoc202207 < MiniTest::Test
+class TestAoc202207 < Minitest::Test
   include TestBase
 
   def answer01

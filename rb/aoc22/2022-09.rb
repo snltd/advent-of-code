@@ -2,7 +2,6 @@
 
 # frozen_string_literal: true
 
-require 'set'
 require_relative '../lib/base'
 
 # https://adventofcode.com/2022/day/09
@@ -11,39 +10,35 @@ class Aoc202209
   def solve01(input)
     h = [0, 0]
     t = [0, 0]
-    tv = Set.new
 
-    input.as_lines.each do |l|
+    input.as_lines.each.with_object(Set.new) do |l, tv|
       dir, count = l.split
 
       count.to_i.times do
         h = move_head(h, dir)
         t = move_tail(h, t)
-        tv.<< t.dup
+        tv << t.dup
       end
-    end
-
-    tv.size
+    end.size
   end
 
+  # rubocop:disable Metrics/AbcSize
   def solve02(input)
     h = [0, 0]
     t = Array.new(9, [0, 0])
-    tv = Set.new
 
-    input.as_lines.each do |l|
+    input.as_lines.each.with_object(Set.new) do |l, tv|
       dir, count = l.split
 
       count.to_i.times do
         h = move_head(h, dir)
         t[0] = move_tail(h, t[0]).dup
         1.upto(8) { |i| t[i] = move_tail(t[i - 1], t[i]).dup }
-        tv.<< t[8].dup
+        tv << t[8].dup
       end
-    end
-
-    tv.size
+    end.size
   end
+  # rubocop:enable Metrics/AbcSize
 
   private
 
@@ -87,7 +82,7 @@ class Aoc202209
   end
 end
 
-class TestAoc202209 < MiniTest::Test
+class TestAoc202209 < Minitest::Test
   include TestBase
 
   def answer01

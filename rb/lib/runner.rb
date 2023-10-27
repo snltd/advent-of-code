@@ -11,7 +11,10 @@ class Runner
     @part = part
 
     require ROOT.join(problem_file)
+
     @c = Object.const_get(problem_class).new
+  rescue LoadError
+    nil
   end
 
   def solve!
@@ -28,16 +31,24 @@ class Runner
   def solve_and_print!
     case @part
     when 1
-      printer(1, @c.solve01(input)) if @c.respond_to?(:solve01)
+      print1
     when 2
-      printer(2, @c.solve02(input)) if @c.respond_to?(:solve02)
+      print2
     else
-      printer(1, @c.solve01(input)) if @c.respond_to?(:solve01)
-      printer(2, @c.solve02(input)) if @c.respond_to?(:solve02)
+      print1
+      print2
     end
   end
 
   private
+
+  def print1
+    printer(1, @c.solve01(input)) if @c.respond_to?(:solve01)
+  end
+
+  def print2
+    printer(2, @c.solve02(input)) if @c.respond_to?(:solve02)
+  end
 
   def printer(part, solution)
     puts "#{@year}-#{@day} part 0#{part}    #{solution}"

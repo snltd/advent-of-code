@@ -17,8 +17,8 @@ class Aoc201605
       d = Digest::MD5.hexdigest("#{input}#{i}")
 
       if d.start_with?('00000')
-        ret.<< d[5]
-        @winners.<< i
+        ret << d[5]
+        @winners << i
         return ret if ret.length == 8
       end
 
@@ -55,7 +55,7 @@ class Aoc201605
   end
 end
 
-class TestAoc201605 < MiniTest::Test
+class TestAoc201605 < Minitest::Test
   include TestBase
 
   def answer01

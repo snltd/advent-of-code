@@ -4,7 +4,7 @@
 require 'minitest/autorun'
 require_relative '../lib/machine_chain'
 
-class TestMachineChain < MiniTest::Test
+class TestMachineChain < Minitest::Test
   def setup
     @c = Intcode::MachineChain.new(5)
   end

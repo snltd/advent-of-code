@@ -7,7 +7,7 @@ require_relative '../../lib/stdlib/string'
 
 INPUT_DIR = Pathname.new(__dir__).parent.parent.parent.join('test_inputs').freeze
 
-class TestString < MiniTest::Test
+class TestString < Minitest::Test
   def test_as_lines
     assert_equal(%w[3 5 7 9], sample('int_list').as_lines)
     assert_equal(%w[abc def ghi], sample('word_list').as_lines)
@@ -33,7 +33,6 @@ class TestString < MiniTest::Test
     )
   end
 
-
   def test_as_blocks
     assert_equal(
       %W[block0 block1\nblock1 block2],
@@ -55,6 +54,11 @@ class TestString < MiniTest::Test
 
   def test_as_intcode
     assert_equal([1, 2, 3, 4, 5], '1,2,3,4,5'.as_intcode)
+  end
+
+  def test_to_hash_table
+    assert_equal({}, ''.to_hash_table)
+    assert_equal({ 'a' => nil, 'b' => nil, 'c' => nil }, 'abc'.to_hash_table)
   end
 
   private

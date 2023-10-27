@@ -40,7 +40,7 @@ class Aoc202004
   end
 end
 
-class TestAoc202004 < MiniTest::Test
+class TestAoc202004 < Minitest::Test
   include TestBase
 
   def answer01
@@ -81,7 +81,6 @@ class TestAoc202004 < MiniTest::Test
                     'iyr:2011 ecl:brn hgt:59in')
   end
 
-  # rubocop:disable Metrics/MethodLength
   def test_valid?
     refute @c.valid?("eyr:1972 cid:100\n" \
                      'hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926')
@@ -112,7 +111,6 @@ class TestAoc202004 < MiniTest::Test
     assert @c.valid?('iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 ' \
                      'eyr:2021 pid:093154719')
   end
-  # rubocop:enable Metrics/MethodLength
 end
 
 # Breaks a passport string up into a hash, and provides methods to validate
@@ -171,7 +169,7 @@ end
 # Unnecessary because we test the interface above, but these were written
 # first, to build the thing tested above. Might as well leave them in.
 #
-class PassportTest < MiniTest::Test
+class PassportTest < Minitest::Test
   def setup
     @c = Passport.new(sample_data)
   end

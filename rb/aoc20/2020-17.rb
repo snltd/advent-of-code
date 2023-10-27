@@ -11,7 +11,7 @@ class Aoc202017
 
     @input.each.with_index do |row, i|
       row.each.with_index do |cell, j|
-        actives.<<([i, j, 0]) if cell == '#'
+        actives << ([i, j, 0]) if cell == '#'
       end
     end.flatten.compact
 
@@ -28,7 +28,7 @@ class Aoc202017
     actives = []
 
     @input.each.with_index do |row, i|
-      row.each.with_index { |cell, j| actives.<<([i, j, 0, 0]) if cell == '#' }
+      row.each.with_index { |cell, j| actives << ([i, j, 0, 0]) if cell == '#' }
     end.flatten.compact
 
     6.times { actives = cycle02(actives) }
@@ -71,12 +71,12 @@ class Aoc202017
       end
 
       an = (nc & actives).count
-      new_actives.<< c if [2, 3].include?(an)
+      new_actives << c if [2, 3].include?(an)
     end
 
     (all_cubes(actives) - actives).each do |c|
       an = (neighbours(c) & actives).count
-      new_actives.<< c if an == 3
+      new_actives << c if an == 3
     end
 
     new_actives
@@ -93,12 +93,12 @@ class Aoc202017
         @neighbour_cache[c] = nc
       end
       an = (nc & actives).size
-      new_actives.<< c if [2, 3].include?(an)
+      new_actives << c if [2, 3].include?(an)
     end
 
     (all_cubes02(actives) - actives).each do |c|
       an = (neighbours(c) & actives).size
-      new_actives.<< c if an == 3
+      new_actives << c if an == 3
     end
 
     new_actives
@@ -110,7 +110,7 @@ class Aoc202017
     x.each.with_object([]) do |x1, aggr|
       y.each do |y1|
         z.each do |z1|
-          aggr.<< [x1, y1, z1]
+          aggr << [x1, y1, z1]
         end
       end
     end
@@ -123,7 +123,7 @@ class Aoc202017
       y.each do |y1|
         z.each do |z1|
           w.each do |w1|
-            aggr.<< [x1, y1, z1, w1]
+            aggr << [x1, y1, z1, w1]
           end
         end
       end
@@ -133,7 +133,7 @@ class Aoc202017
   def limits(actives)
     0.upto(actives.first.size - 1).with_object([]) do |i, aggr|
       x = actives.map { |a| a[i] }
-      aggr.<< Range.new(x.min - 1, x.max + 1).to_a
+      aggr << Range.new(x.min - 1, x.max + 1).to_a
     end
   end
 
@@ -151,7 +151,7 @@ class Aoc202017
   end
 end
 
-class TestAoc202017 < MiniTest::Test
+class TestAoc202017 < Minitest::Test
   include TestBase
 
   def answer01

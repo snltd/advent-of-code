@@ -45,7 +45,7 @@ class Aoc202008
   end
 end
 
-class TestAoc202008 < MiniTest::Test
+class TestAoc202008 < Minitest::Test
   include TestBase
 
   def answer01
@@ -92,7 +92,7 @@ module Assembler
         debug error
       end
 
-      { accumulator: acl, completed: completed, error: error || nil }
+      { accumulator: acl, completed:, error: error || nil }
     end
 
     private
@@ -119,7 +119,7 @@ module Assembler
     def execute_instruction(instruction)
       raise LoopDetected if @execlist.include?(pc)
 
-      @execlist.<< pc if @loop_detector_enabled
+      @execlist << pc if @loop_detector_enabled
 
       inst, arg = instruction
       debug "PC: #{pc} INST: #{inst} ARG: #{arg} ACL: #{acl}"

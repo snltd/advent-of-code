@@ -33,7 +33,7 @@ class Aoc201609
         if c == 'x'
           state = :in_repeat
         else
-          num_buffer.<< c
+          num_buffer << c
         end
       elsif state == :in_repeat
         if c == ')'
@@ -50,7 +50,7 @@ class Aoc201609
           num_buffer = +''
           repeat_buffer = +''
         else
-          repeat_buffer.<< c
+          repeat_buffer << c
         end
       else
         ret += 1
@@ -61,7 +61,7 @@ class Aoc201609
   end
 end
 
-class TestAoc201609 < MiniTest::Test
+class TestAoc201609 < Minitest::Test
   include TestBase
 
   def table01

@@ -6,16 +6,27 @@ RUNNER = true
 
 require_relative 'lib/runner'
 
-abort 'usage: solve <year> <day> [part]' unless ARGV.size == 3 || ARGV.size == 2
+def years
+  Pathname.new(__dir__).children.map { |f| f.basename.to_s }
+          .select { |d| d.match(/^aoc\d\d$/) }
+          .map { |d| d.sub('aoc', '20') }
+end
 
-year_dir = Pathname.new(__dir__).join("aoc#{ARGV.first[2..3]}")
+def year(year)
+  ('01'..'25').map { |d| [year, d] }
+end
 
-abort "invalid year: #{ARGV.first}" unless year_dir.exist?
+puzzles = case ARGV.size
+          when 0
+            years.flat_map { |y| year y }
+          when 1
+            year ARGV[0]
+          when 2, 3
+            [ARGV]
+          else
+            abort 'usage: solve [year] [day] [part]'
+          end
 
-problem = year_dir.join("#{ARGV.first}-#{ARGV[1]}.rb")
-
-abort 'Problem is not solved.' unless problem.exist?
-
-abort 'Part must be 1 or 2.' if ARGV[2] && !ARGV[2].to_i.between?(1, 2)
-
-puts Runner.new(ARGV[0], ARGV[1], ARGV[2].to_i).solve_and_print!
+puzzles.sort.each do |p|
+  Runner.new(p[0], p[1], p[2].to_i).solve_and_print!
+end

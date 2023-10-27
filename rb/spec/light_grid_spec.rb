@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'minitest/autorun'
 require_relative '../lib/light_grid'
 
-class LightGridTest < MiniTest::Test
+class LightGridTest < Minitest::Test
   def setup
     @g = LightGrid.new(5, 5)
   end

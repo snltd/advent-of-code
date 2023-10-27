@@ -2,7 +2,6 @@
 
 # frozen_string_literal: true
 
-require 'set'
 require_relative '../lib/base'
 
 # https://adventofcode.com/2022/day/08
@@ -18,7 +17,7 @@ class Aoc202208
 
       0.upto(row.size - 1) do |x|
         if row[x] > tallest
-          visible.<< [x, y]
+          visible << [x, y]
           tallest = row[x]
         end
 
@@ -29,7 +28,7 @@ class Aoc202208
 
       (row.size - 1).downto(0) do |x|
         if row[x] > tallest
-          visible.<< [x, y]
+          visible << [x, y]
           tallest = row[x]
         end
 
@@ -44,7 +43,7 @@ class Aoc202208
 
       0.upto(col.size - 1) do |y|
         if col[y] > tallest
-          visible.<< [x, y]
+          visible << [x, y]
           tallest = col[y]
         end
 
@@ -55,7 +54,7 @@ class Aoc202208
 
       (col.size - 1).downto(0) do |y|
         if col[y] > tallest
-          visible.<< [x, y]
+          visible << [x, y]
           tallest = col[y]
         end
 
@@ -82,16 +81,17 @@ class Aoc202208
   end
 
   def scenic_score(grid, x, y)
-    s = 0
     z = []
     h = grid[y][x]
 
-    (y - 1).downto(0) do |p| # up
+    s = 0
+
+    z << (y - 1).downto(0) do |p| # up
       s += 1
       break if grid[p][x] >= h
     end
 
-    z.<< s
+    z << s
     s = 0
 
     (x - 1).downto(0) do |p| # left
@@ -99,7 +99,7 @@ class Aoc202208
       break if grid[y][p] >= h
     end
 
-    z.<< s
+    z << s
     s = 0
 
     (x + 1).upto(@edge) do |p| # right
@@ -107,7 +107,7 @@ class Aoc202208
       break if grid[y][p] >= h
     end
 
-    z.<< s
+    z << s
     s = 0
 
     (y + 1).upto(@edge) do |p| # up
@@ -115,13 +115,12 @@ class Aoc202208
       break if grid[p][x] >= h
     end
 
-    z.<< s
-
-    z.inject(:*)
+    z << s
+    z.compact.inject(:*)
   end
 end
 
-class TestAoc202208 < MiniTest::Test
+class TestAoc202208 < Minitest::Test
   include TestBase
 
   def answer01

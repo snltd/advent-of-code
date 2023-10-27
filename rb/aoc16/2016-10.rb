@@ -64,7 +64,7 @@ class Aoc201610
 
   def set_value(bot, value)
     if @bots.key?(bot)
-      @bots[bot].<< value.to_i
+      @bots[bot] << value.to_i
     else
       @bots[bot] = [value.to_i]
     end

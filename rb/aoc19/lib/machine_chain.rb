@@ -6,7 +6,7 @@ module Intcode
   class MachineChain
     def initialize(num)
       machines = []
-      num.times { machines.<< Intcode::Computer.new(stop_on_output: true) }
+      num.times { machines << Intcode::Computer.new(stop_on_output: true) }
       @machines = machines
     end
 

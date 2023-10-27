@@ -19,9 +19,9 @@ class Aoc202002
     input.as_lines.map do |row|
       range, letter, password = row.split(/[\s:]+/)
 
-      { letter: letter,
+      { letter:,
         range: Range.new(*range.split('-').to_i),
-        password: password }
+        password: }
     end
   end
 
@@ -42,13 +42,13 @@ class Aoc202002
   def parse(raw)
     range, letter, password = raw.split(/[\s:]+/)
 
-    { letter: letter,
+    { letter:,
       positions: range.split('-').to_i,
-      password: password }
+      password: }
   end
 end
 
-class TestAoc202002 < MiniTest::Test
+class TestAoc202002 < Minitest::Test
   include TestBase
 
   def answer01

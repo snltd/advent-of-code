@@ -41,19 +41,23 @@ class Aoc201604
     m = room.match(/^([\w-]+)-(\d+)\[(\w+)\]$/)
     name, sid, cksum = m.captures
 
-    our_cksum = name.delete('-')
-                    .each_char.tally
-                    .sort_by { |k, v| [-v, k] }
-                    .take(cksum.length)
-                    .to_h
-                    .keys.sort
+    our_cksum = calc_sum(name, cksum)
 
     their_cksum = cksum.each_char.sort
     our_cksum == their_cksum ? sid.to_i : 0
   end
+
+  def calc_sum(name, cksum)
+    name.delete('-')
+        .each_char.tally
+        .sort_by { |k, v| [-v, k] }
+        .take(cksum.length)
+        .to_h
+        .keys.sort
+  end
 end
 
-class TestAoc201604 < MiniTest::Test
+class TestAoc201604 < Minitest::Test
   include TestBase
 
   def table01

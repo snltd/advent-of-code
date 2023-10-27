@@ -21,7 +21,6 @@ class Aoc202019
     [rule_list, messages]
   end
 
-  # rubocop:disable Metrics/MethodLength
   def expand_rule(rule_list, index)
     rule_list[index].split.map do |r|
       ri = r.to_i
@@ -37,7 +36,6 @@ class Aoc202019
       end
     end
   end
-  # rubocop:enable Metrics/MethodLength
 
   def regex(rule_list)
     Regexp.new('^' + expand_rule(rule_list, 0)
@@ -47,7 +45,7 @@ class Aoc202019
   end
 end
 
-class TestAoc202019 < MiniTest::Test
+class TestAoc202019 < Minitest::Test
   include TestBase
 
   def answer01

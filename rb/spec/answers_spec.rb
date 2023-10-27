@@ -7,7 +7,7 @@ require_relative '../lib/constants'
 require_relative '../lib/runner'
 require_relative '../lib/stdlib/time'
 
-class TestAllAnswers < MiniTest::Test
+class TestAllAnswers < Minitest::Test
   def test_all_answers
     ROOT.parent.join('answers').children.sort.each do |year_file|
       year = year_file.basename.to_s
@@ -38,7 +38,7 @@ class TestAllAnswers < MiniTest::Test
 
     return if duration.is_a?(String)
 
-    return "#{char * width}>>"  if duration > too_long
+    return "#{char * width}>>" if duration > too_long
 
     (char * (duration * 400))[0..(width - 5)]
   end
@@ -59,7 +59,7 @@ class TestAllAnswers < MiniTest::Test
                 year: year.to_i,
                 day: problem.to_i,
                 part: part.to_i,
-                duration: duration,
+                duration:,
                 bar: bar(duration))
   end
 end

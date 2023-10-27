@@ -56,7 +56,7 @@ class Aoc202009
 
     while running_sum < target
       running_sum += input[index]
-      sequence.<< input[index]
+      sequence << input[index]
       return sequence if running_sum == target
 
       index += 1
@@ -66,7 +66,7 @@ class Aoc202009
   end
 end
 
-class TestAoc202009 < MiniTest::Test
+class TestAoc202009 < Minitest::Test
   include TestBase
 
   def answer01
@@ -116,7 +116,7 @@ class TestAoc202009 < MiniTest::Test
   end
 
   def test_addends_ex2
-    range = Range.new(1, 25).to_a.<< 45
+    range = Range.new(1, 25).to_a << 45
     range.delete(20)
     assert @c.addends?(26, range)
     refute @c.addends?(65, range)

@@ -71,7 +71,7 @@ class Aoc201601
   end
 end
 
-class TestAoc201601 < MiniTest::Test
+class TestAoc201601 < Minitest::Test
   include TestBase
 
   def table01
