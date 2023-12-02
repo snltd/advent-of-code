@@ -9,6 +9,16 @@ require_relative '../lib/base'
 class Aoc202301
   NUMS = (1..9).to_a.map(&:to_s)
 
+  WORD = { 'one' => 1,
+           'two' => 2,
+           'three' => 3,
+           'four' => 4,
+           'five' => 5,
+           'six' => 6,
+           'seven' => 7,
+           'eight' => 8,
+           'nine' => 9 }
+
   def solve01(input)
     input.as_lines.sum { |l| "#{first_num(l)}#{last_num(l)}".to_i }
   end
@@ -19,23 +29,11 @@ class Aoc202301
 
   private
 
-  def number
-    { 'one' => 1,
-      'two' => 2,
-      'three' => 3,
-      'four' => 4,
-      'five' => 5,
-      'six' => 6,
-      'seven' => 7,
-      'eight' => 8,
-      'nine' => 9 }
-  end
-
   def nums02(line)
-    first = first_num(line.sub(/one|two|three|four|five|six|seven|eight|nine/, number))
+    first = first_num(line.sub(/one|two|three|four|five|six|seven|eight|nine/, WORD))
 
     l = line.gsub(/(.*)(one|two|three|four|five|six|seven|eight|nine)(.*)/) do
-      ::Regexp.last_match(1) + number[::Regexp.last_match(2)].to_s + ::Regexp.last_match(3)
+      ::Regexp.last_match(1) + WORD[::Regexp.last_match(2)].to_s + ::Regexp.last_match(3)
     end
 
     "#{first}#{last_num(l)}".to_i
