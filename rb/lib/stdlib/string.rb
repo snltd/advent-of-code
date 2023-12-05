@@ -56,4 +56,8 @@ class String
   def to_hash_table
     chars.zip(Array.new(length)).to_h
   end
+
+  def is_integer?
+    match(/^\d+$/)
+  end
 end

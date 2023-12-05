@@ -17,7 +17,7 @@ class Aoc202301
            'six' => 6,
            'seven' => 7,
            'eight' => 8,
-           'nine' => 9 }
+           'nine' => 9 }.freeze
 
   def solve01(input)
     input.as_lines.sum { |l| "#{first_num(l)}#{last_num(l)}".to_i }

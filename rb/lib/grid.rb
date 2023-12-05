@@ -11,9 +11,9 @@ require_relative 'stdlib/string'
 # 2 | 6 7 8
 #
 class Grid
-  attr_accessor :grid
+  attr_accessor :grid, :width, :height, :points
 
-  def initialize(grid, _size)
+  def initialize(grid)
     raw = grid.as_lines
 
     @width = raw.first.size
@@ -36,6 +36,18 @@ class Grid
   #
   def vals_of(points)
     points.map { |p| @grid[p] }
+  end
+
+  # Values at the given points with point index [p, val]
+  #
+  def vals_of_with_index(points)
+    points.map { |p| [p, @grid[p]] }
+  end
+
+  def indices_of(val)
+    ret = []
+    @grid.each_with_index { |p, i| ret.<<i if p == val }
+    ret
   end
 
   # Neighbours of the given point when you can move N E S W
@@ -75,11 +87,23 @@ class Grid
     p = point + @width + 1
     ret << p if adjacent_row?(p, point)
 
-    ret.reject { |q| q.negative? || p >= @points }
+    ret.reject { |q| q.negative? || q >= @points }
   end
 
   def to_s
     "\n#{@grid.each_slice(@width).map(&:join).join("\n")}\n"
+  end
+
+  def all_points
+    0...@points
+  end
+
+  def all_vals
+    vals_of(all_points)
+  end
+
+  def all_vals_with_index
+    vals_of_with_index(all_points)
   end
 
   private
