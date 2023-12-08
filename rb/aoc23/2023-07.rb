@@ -58,7 +58,10 @@ class Aoc202307
   end
 
   def process(input)
-    input.as_lines.map(&:split).to_h { |k, v| [k.chars, v.to_i] }
+    input.as_lines.to_h do |l|
+      k, v = l.split
+      [k.chars, v.to_i]
+    end
   end
 
   def scorer(v, h, cards)

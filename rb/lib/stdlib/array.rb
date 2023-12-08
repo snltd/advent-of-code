@@ -12,4 +12,8 @@ class Array
   def to_hash_table
     zip(Array.new(length)).to_h
   end
+
+  def lcm
+    reduce(1, :lcm)
+  end
 end
