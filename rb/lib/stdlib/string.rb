@@ -60,4 +60,9 @@ class String
   def is_integer?
     match(/^\d+$/)
   end
+
+  # turn a space-separated list of numbers into an array of ints
+  def to_ints
+    split.map(&:to_i)
+  end
 end
