@@ -64,6 +64,101 @@ class Test < Minitest::Test
     assert_equal(%w[o p], @g.vals_to_end_of_row(13).to_a)
   end
 
+  def test_insert_row_before_0
+    assert_equal(
+      %w[A B C D a b c d e f g h i j k l m n o p],
+      @g.insert_row_before(0, %w[A B C D])
+    )
+  end
+
+  def test_insert_row_after_1
+    assert_equal(
+      %w[a b c d e f g h A B C D i j k l m n o p],
+      @g.insert_row_after(1, %w[A B C D])
+    )
+
+    assert_equal(5, @g.height)
+    assert_equal(4, @g.width)
+    assert_equal(20, @g.points)
+  end
+
+  def test_insert_row_after_2
+    @g.insert_row_after(2, %w[A B C D])
+
+    assert_equal(
+      "abcd\n" \
+      "efgh\n" \
+      "ijkl\n" \
+      "ABCD\n" \
+      'mnop',
+      @g.to_s.strip
+    )
+
+    assert_equal(5, @g.height)
+    assert_equal(4, @g.width)
+    assert_equal(20, @g.points)
+  end
+
+  def test_insert_col_after_2
+    @g.insert_col_after(2, %w[A B C D])
+
+    assert_equal(
+      "abcAd\n" \
+      "efgBh\n" \
+      "ijkCl\n" \
+      'mnoDp',
+      @g.to_s.strip
+    )
+
+    assert_equal(4, @g.height)
+    assert_equal(5, @g.width)
+    assert_equal(20, @g.points)
+  end
+
+  def test_insert_col_before_0
+    @g.insert_col_before(0, %w[A B C D])
+
+    assert_equal(
+      "Aabcd\n" \
+      "Befgh\n" \
+      "Cijkl\n" \
+      'Dmnop',
+      @g.to_s.strip
+    )
+
+    assert_equal(4, @g.height)
+    assert_equal(5, @g.width)
+    assert_equal(20, @g.points)
+  end
+
+  def test_row
+    assert_equal(%w[a b c d], @g.row(0))
+    assert_equal(%w[e f g h], @g.row(1))
+    assert_nil(@g.row(100))
+  end
+
+  def test_col
+    assert_equal(%w[a e i m], @g.col(0))
+    assert_equal(%w[d h l p], @g.col(3))
+  end
+
+  def test_rows
+    assert_equal(4, @g.rows.size)
+    assert_equal(%w[a b c d], @g.rows.first)
+  end
+
+  def test_cols
+    assert_equal(4, @g.cols.size)
+  end
+
+  def test_manhattan
+    a = 0
+    b = 13
+
+    assert_equal(4, @g.manhattan(a, b))
+    assert_equal(4, @g.manhattan(b, a))
+  end
+
   private
 
   def sample

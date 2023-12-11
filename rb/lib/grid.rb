@@ -193,6 +193,58 @@ class Grid
     vals_of_with_index(all_points)
   end
 
+  def insert_row_after(index, contents)
+    @height += 1
+    @points = @width * @height
+    @grid.insert((index + 1) * @width, *contents)
+  end
+
+  def insert_row_before(index, contents)
+    insert_row_after(index - 1, contents)
+  end
+
+  def insert_col_after(index, contents)
+    @width += 1
+    @points = @width * @height
+    (index + 1).step(@points, @width) do |i|
+      @grid.insert(i, contents.shift)
+    end
+  end
+
+  def insert_col_before(index, contents)
+    insert_col_after(index - 1, contents)
+  end
+
+  # @return [Array] contents of given row. Top row is 0.
+  #
+  def row(index)
+    idx_start = index * @width
+    idx_end = idx_start + @width - 1
+
+    @grid[idx_start..idx_end]
+  end
+
+  # @return [Array] contents of given column. Left is 0.
+  #
+  def col(index)
+    index.step(@points - 1, @width).map { |i| @grid[i] }
+  end
+
+  def rows
+    Range.new(0, @height - 1).map { |i| row(i) }
+  end
+
+  def cols
+    Range.new(0, @height - 1).map { |i| col(i) }
+  end
+
+  def manhattan(start, finish)
+    sx, sy = x_y(start)
+    ex, ey = x_y(finish)
+
+    (sx - ex).abs + (sy - ey).abs
+  end
+
   private
 
   def same_row?(point1, point2)
