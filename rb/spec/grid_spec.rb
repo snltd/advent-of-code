@@ -40,6 +40,30 @@ class Test < Minitest::Test
     assert_equal([6], @g.indices_of('g'))
   end
 
+  def test_x_y
+    assert_equal([0, 0], @g.x_y(0))
+    assert_equal([2, 0], @g.x_y(2))
+    assert_equal([3, 3], @g.x_y(15))
+  end
+
+  def test_from_x_y
+    assert_equal(0, @g.from_x_y([0, 0]))
+    assert_equal(2, @g.from_x_y([2, 0]))
+    assert_equal(15, @g.from_x_y([3, 3]))
+  end
+
+  def test_to_end_of_row
+    assert_empty(@g.to_end_of_row(7).to_a)
+    assert_equal([5, 6, 7], @g.to_end_of_row(4).to_a)
+    assert_equal([14, 15], @g.to_end_of_row(13).to_a)
+  end
+
+  def test_vals_to_end_of_row
+    assert_empty(@g.vals_to_end_of_row(7).to_a)
+    assert_equal(%w[f g h], @g.vals_to_end_of_row(4).to_a)
+    assert_equal(%w[o p], @g.vals_to_end_of_row(13).to_a)
+  end
+
   private
 
   def sample
