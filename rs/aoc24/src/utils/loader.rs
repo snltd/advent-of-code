@@ -4,6 +4,7 @@ use std::path::PathBuf;
 
 pub type InputLines = Vec<String>;
 pub type InputCols = Vec<Vec<i32>>;
+pub type InputRows = Vec<Vec<i32>>;
 
 fn input(day: &str) -> PathBuf {
     let pwd = current_dir().unwrap();
@@ -38,7 +39,10 @@ pub fn input_as_cols(day: &str) -> InputCols {
         .iter()
         .map(|l| {
             l.split_whitespace()
-                .map(|n| n.parse::<_>().unwrap())
+                .map(|n| {
+                    n.parse::<_>()
+                        .unwrap_or_else(|_| panic!("input_as_cols choked on {}", n))
+                })
                 .collect()
         })
         .collect();
@@ -47,6 +51,20 @@ pub fn input_as_cols(day: &str) -> InputCols {
 
     (0..column_count)
         .map(|i| rows.iter().map(|row| row[i]).collect())
+        .collect()
+}
+
+pub fn input_as_rows(day: &str) -> InputRows {
+    input_as_lines(day)
+        .iter()
+        .map(|l| {
+            l.split_whitespace()
+                .map(|n| {
+                    n.parse::<_>()
+                        .unwrap_or_else(|_| panic!("input_as_rows choked on {}", n))
+                })
+                .collect()
+        })
         .collect()
 }
 
@@ -66,6 +84,21 @@ mod test {
         assert_eq!(
             vec![vec![3, 4, 2, 1, 3, 3], vec![4, 3, 5, 3, 9, 3]],
             input_as_cols("01")
+        );
+    }
+
+    #[test]
+    fn test_input_as_rows() {
+        assert_eq!(
+            vec![
+                vec![7, 6, 4, 2, 1],
+                vec![1, 2, 7, 8, 9],
+                vec![9, 7, 6, 2, 1],
+                vec![1, 3, 2, 4, 5],
+                vec![8, 6, 4, 4, 1],
+                vec![1, 3, 6, 7, 9],
+            ],
+            input_as_rows("02")
         );
     }
 }
