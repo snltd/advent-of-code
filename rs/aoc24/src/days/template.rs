@@ -15,11 +15,11 @@ mod test {
 
     #[test]
     fn test_0101() {
-        assert_eq!(11, part_01(input_as_rows("01")));
+        assert_eq!(-1, part_01(input_as_rows("01")));
     }
 
     #[test]
     fn test_0102() {
-        assert_eq!(31, part_02(input_as_rows("01")));
+        assert_eq!(-1, part_02(input_as_rows("01")));
     }
 }

@@ -30,6 +30,14 @@ pub fn raw_input(day: &str) -> String {
         .into()
 }
 
+// pub fn input_as_single_string(day: &str) -> String {
+//     raw_input(day)
+//         .lines()
+//         .map(|l| l.into())
+//         .collect::<Vec<String>>()
+//         .join("")
+// }
+
 pub fn input_as_lines(day: &str) -> InputLines {
     raw_input(day).lines().map(|l| l.into()).collect()
 }
