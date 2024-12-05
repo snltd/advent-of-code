@@ -4,6 +4,7 @@ use std::path::PathBuf;
 
 pub type InputLines = Vec<String>;
 pub type InputCols = Vec<Vec<i32>>;
+pub type InputBlocks = Vec<String>;
 pub type InputRows = Vec<Vec<i32>>;
 
 fn input(day: &str) -> PathBuf {
@@ -59,6 +60,13 @@ pub fn input_as_cols(day: &str) -> InputCols {
 
     (0..column_count)
         .map(|i| rows.iter().map(|row| row[i]).collect())
+        .collect()
+}
+
+pub fn input_as_blocks(day: &str) -> InputBlocks {
+    raw_input(day)
+        .split("\n\n")
+        .map(|b| b.trim().to_owned())
         .collect()
 }
 

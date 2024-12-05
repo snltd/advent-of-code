@@ -1,5 +1,6 @@
 mod days;
 mod utils;
+use utils::loader::input_as_blocks;
 use utils::loader::input_as_cols;
 use utils::loader::input_as_lines;
 use utils::loader::input_as_rows;
@@ -17,4 +18,7 @@ fn main() {
 
     println!("04/01: {:?}", days::day_04::part_01(&input_as_lines("04")));
     println!("04/02: {:?}", days::day_04::part_02(&input_as_lines("04")));
+
+    println!("05/01: {:?}", days::day_05::part_01(&input_as_blocks("05")));
+    println!("05/02: {:?}", days::day_05::part_02(&input_as_blocks("05")));
 }

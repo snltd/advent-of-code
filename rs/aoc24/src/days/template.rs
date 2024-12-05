@@ -1,11 +1,11 @@
 use crate::utils::loader::InputRows;
 
-pub fn part_01(input: InputRows) -> i32 {
-    -1
+pub fn part_01(input: InputRows) -> usize {
+    0
 }
 
-pub fn part_02(input: InputRows) -> i32 {
-    -1
+pub fn part_02(input: InputRows) -> usize {
+    0
 }
 
 #[cfg(test)]
@@ -15,11 +15,11 @@ mod test {
 
     #[test]
     fn test_0101() {
-        assert_eq!(-1, part_01(input_as_rows("01")));
+        assert_eq!(-1, part_01(&input_as_rows("01")));
     }
 
     #[test]
     fn test_0102() {
-        assert_eq!(-1, part_02(input_as_rows("01")));
+        assert_eq!(-1, part_02(&input_as_rows("01")));
     }
 }
