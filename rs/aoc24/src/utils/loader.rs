@@ -6,6 +6,7 @@ pub type InputLines = Vec<String>;
 pub type InputCols = Vec<Vec<i32>>;
 pub type InputBlocks = Vec<String>;
 pub type InputRows = Vec<Vec<i32>>;
+pub type InputChars = Vec<Vec<char>>;
 
 fn input(day: &str) -> PathBuf {
     let pwd = current_dir().unwrap();
@@ -41,6 +42,13 @@ pub fn raw_input(day: &str) -> String {
 
 pub fn input_as_lines(day: &str) -> InputLines {
     raw_input(day).lines().map(|l| l.into()).collect()
+}
+
+pub fn input_as_chars(day: &str) -> InputChars {
+    input_as_lines(day)
+        .iter()
+        .map(|l| l.chars().collect())
+        .collect()
 }
 
 pub fn input_as_cols(day: &str) -> InputCols {
