@@ -25,4 +25,7 @@ fn main() {
 
     println!("06/01: {:?}", days::day_06::part_01(&input_as_chars("06")));
     println!("06/02: {:?}", days::day_06::part_02(&input_as_chars("06")));
+
+    println!("07/01: {:?}", days::day_07::part_01(&input_as_lines("07")));
+    println!("07/02: {:?}", days::day_07::part_02(&input_as_lines("07")));
 }
