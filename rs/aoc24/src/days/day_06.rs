@@ -1,6 +1,8 @@
 use crate::utils::loader::InputChars;
+use rayon::prelude::*;
 use std::collections::HashSet;
 
+#[derive(Clone)]
 struct InputMap {
     data: Vec<char>,
     width: usize,
@@ -17,10 +19,6 @@ impl InputMap {
 
     fn place_obstacle_at(&mut self, index: usize) {
         self.data[index] = '#'
-    }
-
-    fn remove_obstacle_at(&mut self, index: usize) {
-        self.data[index] = '.'
     }
 
     fn index_of_char(&self, char: char) -> usize {
@@ -94,61 +92,50 @@ pub fn part_01(input: &InputChars) -> usize {
     let mut direction = Direction::Up;
     let mut visited: HashSet<usize> = HashSet::new();
 
-    loop {
+    while map.char_at(index) != 'x' {
         visited.insert(index);
         (index, direction) = map.move_guard(index, direction);
-
-        if map.char_at(index) == 'x' {
-            break;
-        }
     }
 
     visited.len()
 }
 
 pub fn part_02(input: &InputChars) -> usize {
-    let mut map = InputMap::new(input);
+    let map = InputMap::new(input);
     let mut index = map.index_of_char('^');
     let mut direction = Direction::Up;
     let mut path: HashSet<usize> = HashSet::new();
 
-    loop {
+    while map.char_at(index) != 'x' {
         (index, direction) = map.move_guard(index, direction);
-        if map.char_at(index) == 'x' {
-            break;
-        }
-
         path.insert(index);
     }
 
-    let mut causes_loop = 0;
     let start = map.index_of_char('^');
 
-    for i in path.iter() {
-        map.place_obstacle_at(*i);
-        let mut index = start;
-        let mut direction = Direction::Up;
-        let mut steps = 0;
+    path.par_iter()
+        .map(|i| {
+            let mut pmap = map.clone();
+            pmap.place_obstacle_at(*i);
+            let mut index = start;
+            let mut direction = Direction::Up;
+            let mut steps = 0;
 
-        loop {
-            (index, direction) = map.move_guard(index, direction);
+            loop {
+                (index, direction) = pmap.move_guard(index, direction);
 
-            if steps == 5300 {
-                causes_loop += 1;
-                break;
+                if steps == 5300 {
+                    return 1;
+                }
+
+                if pmap.char_at(index) == 'x' {
+                    return 0;
+                }
+
+                steps += 1;
             }
-
-            if map.char_at(index) == 'x' {
-                break;
-            }
-
-            steps += 1;
-        }
-
-        map.remove_obstacle_at(*i);
-    }
-
-    causes_loop
+        })
+        .sum()
 }
 
 #[cfg(test)]

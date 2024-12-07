@@ -9,7 +9,7 @@ fn padded(input: &InputLines) -> (Letters, usize) {
     (padded_input.chars().collect(), width)
 }
 
-pub fn part_01(input: &InputLines) -> i32 {
+pub fn part_01(input: &InputLines) -> usize {
     let (letters, width) = padded(input);
     let mut found = 0;
 
@@ -41,18 +41,15 @@ fn letter_at(letters: &Letters, index: usize, desired: char) -> bool {
     }
 }
 
-pub fn part_02(input: &InputLines) -> i32 {
+pub fn part_02(input: &InputLines) -> usize {
     let (letters, width) = padded(input);
-    let mut found: i32 = 0;
 
-    for i in 0..=letters.len() {
-        found += mas_search(&letters, i, width);
-    }
-
-    found
+    (0..=letters.len())
+        .map(|i| mas_search(&letters, i, width))
+        .sum()
 }
 
-fn mas_search(letters: &Letters, index: usize, width: usize) -> i32 {
+fn mas_search(letters: &Letters, index: usize, width: usize) -> usize {
     let arrangements = [
         [
             (0, 'M'),
@@ -87,7 +84,7 @@ fn mas_search(letters: &Letters, index: usize, width: usize) -> i32 {
     arrangements
         .iter()
         .filter(|a| a.iter().all(|(m, c)| letter_at(letters, index + m, *c)))
-        .count() as i32
+        .count()
 }
 
 #[cfg(test)]

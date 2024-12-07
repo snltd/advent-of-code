@@ -1,17 +1,17 @@
 use regex::Regex;
 
-pub fn part_01(input: &str) -> i32 {
+pub fn part_01(input: &str) -> usize {
     let rx = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
     let mut total = 0;
 
     for (_, [a, b]) in rx.captures_iter(input).map(|c| c.extract()) {
-        total += a.parse::<i32>().unwrap() * b.parse::<i32>().unwrap();
+        total += a.parse::<usize>().unwrap() * b.parse::<usize>().unwrap();
     }
 
     total
 }
 
-pub fn part_02(input: &str) -> i32 {
+pub fn part_02(input: &str) -> usize {
     let rx = Regex::new(r"(?s)don't\(\).*?do\(\)").unwrap();
     part_01(&rx.replace_all(input, ""))
 }

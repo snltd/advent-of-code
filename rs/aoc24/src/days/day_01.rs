@@ -1,5 +1,6 @@
 use crate::utils::helpers::frequencies;
 use crate::utils::loader::InputCols;
+use rayon::prelude::*;
 
 pub fn part_01(input: InputCols) -> i32 {
     let mut left = input[0].clone();
@@ -7,7 +8,10 @@ pub fn part_01(input: InputCols) -> i32 {
     left.sort();
     right.sort();
 
-    (0..left.len()).map(|i| (left[i] - right[i]).abs()).sum()
+    (0..left.len())
+        .into_par_iter()
+        .map(|i| (left[i] - right[i]).abs())
+        .sum()
 }
 
 pub fn part_02(input: InputCols) -> i32 {

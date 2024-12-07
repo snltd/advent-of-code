@@ -1,7 +1,8 @@
 use crate::utils::loader::InputRows;
+use rayon::prelude::*;
 
-pub fn part_01(input: &InputRows) -> i32 {
-    input.iter().filter(|r| row_is_safe_01(r)).count() as i32
+pub fn part_01(input: &InputRows) -> usize {
+    input.par_iter().filter(|r| row_is_safe_01(r)).count()
 }
 
 fn row_is_safe_01(row: &[i32]) -> bool {
@@ -22,8 +23,8 @@ fn row_is_safe_01(row: &[i32]) -> bool {
     true
 }
 
-pub fn part_02(input: &InputRows) -> i32 {
-    input.iter().filter(|r| row_is_safe_02(r)).count() as i32
+pub fn part_02(input: &InputRows) -> usize {
+    input.par_iter().filter(|r| row_is_safe_02(r)).count()
 }
 
 fn row_is_safe_02(row: &[i32]) -> bool {

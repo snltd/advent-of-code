@@ -1,4 +1,5 @@
 use crate::utils::loader::InputBlocks;
+use rayon::prelude::*;
 use std::collections::HashSet;
 
 type Rules = HashSet<(usize, usize)>;
@@ -7,7 +8,7 @@ type Update = Vec<usize>;
 pub fn part_01(input: &InputBlocks) -> usize {
     let rules = rules_from(&input[0]);
     let updates = updates_from(&input[1]);
-    updates.iter().map(|u| check_update(u, &rules)).sum()
+    updates.par_iter().map(|u| check_update(u, &rules)).sum()
 }
 
 fn check_update(update: &Update, rules: &Rules) -> usize {
@@ -49,11 +50,14 @@ pub fn part_02(input: &InputBlocks) -> usize {
     let updates = updates_from(&input[1]);
 
     let bad_updates: Vec<&Update> = updates
-        .iter()
+        .par_iter()
         .filter(|u| check_update(u, &rules) == 0)
         .collect();
 
-    bad_updates.iter().map(|u| reorder_update(u, &rules)).sum()
+    bad_updates
+        .par_iter()
+        .map(|u| reorder_update(u, &rules))
+        .sum()
 }
 
 fn reorder_update(update: &Update, rules: &Rules) -> usize {
