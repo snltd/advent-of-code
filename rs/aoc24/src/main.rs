@@ -40,4 +40,7 @@ fn main() {
 
     run_and_time("08/01", || days::day_08::part_01(&input_as_chars("08")));
     run_and_time("08/02", || days::day_08::part_02(&input_as_chars("08")));
+
+    run_and_time("09/01", || days::day_09::part_01(&input_as_chars("09")));
+    run_and_time("09/02", || days::day_09::part_02(&input_as_chars("09")));
 }
