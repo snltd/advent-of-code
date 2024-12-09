@@ -34,6 +34,7 @@ pub fn part_01(input: &InputChars) -> usize {
         for pair in indices.iter().combinations(2) {
             let x_diff = pair[1].0 - pair[0].0;
             let y_diff = pair[1].1 - pair[0].1;
+
             let antinode_0 = (pair[0].0 - x_diff, pair[0].1 - y_diff);
             let antinode_1 = (pair[1].0 + x_diff, pair[1].1 + y_diff);
 
@@ -62,25 +63,19 @@ pub fn part_02(input: &InputChars) -> usize {
             let x_diff = pair[1].0 - pair[0].0;
             let y_diff = pair[1].1 - pair[0].1;
 
-            for i in 1..100 {
+            (0..100).for_each(|i| {
                 let antinode_0 = (pair[0].0 - i * x_diff, pair[0].1 - i * y_diff);
-
                 if valid_point(antinode_0, x_max, y_max) {
                     antinodes.insert(antinode_0);
-                } else {
-                    break;
                 }
-            }
+            });
 
-            for i in 1..100 {
+            (0..100).for_each(|i| {
                 let antinode_1 = (pair[0].0 + i * x_diff, pair[0].1 + i * y_diff);
-
                 if valid_point(antinode_1, x_max, y_max) {
                     antinodes.insert(antinode_1);
-                } else {
-                    break;
                 }
-            }
+            });
         }
     }
 
