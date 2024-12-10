@@ -7,6 +7,7 @@ pub type InputCols = Vec<Vec<i32>>;
 pub type InputBlocks = Vec<String>;
 pub type InputRows = Vec<Vec<i32>>;
 pub type InputChars = Vec<Vec<char>>;
+pub type InputIntGrid = Vec<Vec<usize>>;
 
 fn input(day: &str) -> PathBuf {
     let pwd = current_dir().unwrap();
@@ -30,6 +31,21 @@ pub fn raw_input(day: &str) -> String {
         .expect("could not load input")
         .trim()
         .into()
+}
+
+pub fn input_as_int_grid(day: &str) -> InputIntGrid {
+    input_as_lines(day)
+        .iter()
+        .map(|l| {
+            l.chars()
+                .map(|n| {
+                    n.to_string()
+                        .parse::<usize>()
+                        .unwrap_or_else(|_| panic!("input_as_int_grid choked on '{}'", n))
+                })
+                .collect()
+        })
+        .collect()
 }
 
 // pub fn input_as_single_string(day: &str) -> String {
