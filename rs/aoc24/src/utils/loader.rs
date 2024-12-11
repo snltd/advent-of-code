@@ -8,6 +8,7 @@ pub type InputBlocks = Vec<String>;
 pub type InputRows = Vec<Vec<i32>>;
 pub type InputChars = Vec<Vec<char>>;
 pub type InputIntGrid = Vec<Vec<usize>>;
+pub type InputWords = Vec<String>;
 
 fn input(day: &str) -> PathBuf {
     let pwd = current_dir().unwrap();
@@ -105,6 +106,13 @@ pub fn input_as_rows(day: &str) -> InputRows {
                 })
                 .collect()
         })
+        .collect()
+}
+
+pub fn input_as_words(day: &str) -> InputWords {
+    raw_input(day)
+        .split_whitespace()
+        .map(|s| s.to_string())
         .collect()
 }
 

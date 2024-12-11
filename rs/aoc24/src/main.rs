@@ -3,7 +3,7 @@ mod utils;
 use std::time::Instant;
 use utils::loader::{
     input_as_blocks, input_as_chars, input_as_cols, input_as_int_grid, input_as_lines,
-    input_as_rows, raw_input,
+    input_as_rows, input_as_words, raw_input,
 };
 
 fn run_and_time<F, T>(label: &str, f: F)
@@ -47,4 +47,7 @@ fn main() {
 
     run_and_time("10/01", || days::day_10::part_01(&input_as_int_grid("10")));
     run_and_time("10/02", || days::day_10::part_02(&input_as_int_grid("10")));
+
+    run_and_time("11/01", || days::day_11::part_01(&input_as_words("11")));
+    run_and_time("11/02", || days::day_11::part_02(&input_as_words("11")));
 }
