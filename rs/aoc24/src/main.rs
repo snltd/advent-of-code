@@ -50,4 +50,7 @@ fn main() {
 
     run_and_time("11/01", || days::day_11::part_01(&input_as_words("11")));
     run_and_time("11/02", || days::day_11::part_02(&input_as_words("11")));
+
+    run_and_time("12/01", || days::day_12::part_01(&input_as_chars("12")));
+    run_and_time("12/02", || days::day_12::part_02(&input_as_chars("12")));
 }
