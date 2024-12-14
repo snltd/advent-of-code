@@ -56,4 +56,7 @@ fn main() {
 
     run_and_time("13/01", || days::day_13::part_01(&input_as_blocks("13")));
     run_and_time("13/02", || days::day_13::part_02(&input_as_blocks("13")));
+
+    run_and_time("14/01", || days::day_14::part_01(&input_as_lines("14")));
+    // run_and_time("14/02", || days::day_14::part_02(&input_as_lines("14")));
 }
